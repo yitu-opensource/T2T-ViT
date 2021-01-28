@@ -53,7 +53,7 @@ Train the T2T-ViT_t-14 (take transformer in T2T transformer):
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_t_14 -b 64 --lr 5e-4 --weight-decay .05 --img-size 224
 ```
 
-Train the T2T-ViT_t-14 (take transformer in T2T transformer):
+Train the T2T-ViT_t-24 (take transformer in T2T transformer):
 ```
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_t_24 -b 64 --lr 5e-4 --weight-decay .05 --img-size 224
 ```
