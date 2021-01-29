@@ -1,8 +1,8 @@
-# Tokens-to-Token ViT: Training Vision Transformers from Scratch on ImageNet
+# Tokens-to-Token ViT: Training Vision Transformers from Scratch on ImageNet, [arxiv](https://arxiv.org/abs/2101.11986)
 
 ![](images/f1.png)
 
-Our codes are modified from the [official imagenet example](https://github.com/pytorch/examples/tree/master/imagenet) by [PyTorch](https://pytorch.org/) and [pytorch-image-models](https://github.com/rwightman/pytorch-image-models) by [Ross Wightman](https://github.com/rwightman)
+Our codes are based on the [official imagenet example](https://github.com/pytorch/examples/tree/master/imagenet) by [PyTorch](https://pytorch.org/) and [pytorch-image-models](https://github.com/rwightman/pytorch-image-models) by [Ross Wightman](https://github.com/rwightman)
 
 
 ## Requirements
@@ -65,5 +65,12 @@ Updating...
 ## Reference
 If you find this repo useful, please consider citing:
 ```
-Coming soon
+@misc{yuan2021tokenstotoken,
+    title={Tokens-to-Token ViT: Training Vision Transformers from Scratch on ImageNet},
+    author={Li Yuan and Yunpeng Chen and Tao Wang and Weihao Yu and Yujun Shi and Francis EH Tay and Jiashi Feng and Shuicheng Yan},
+    year={2021},
+    eprint={2101.11986},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
+}
 ```
