@@ -1,5 +1,11 @@
 # Tokens-to-Token ViT: Training Vision Transformers from Scratch on ImageNet, [arxiv](https://arxiv.org/abs/2101.11986)
 
+### Update: 2020/02/02: About the GPU memory problem. 
+
+We will release the implementation of Performer layer in T2T module next week. Currently, all models taking Transformer layer cause very high GPU memory as it needs huge memory to save the attention map in T2T module. After we release the Performer implementations, you can run our T2T-ViT in your 12G GPUs. 
+
+
+
 ![](images/f1.png)
 
 Our codes are based on the [official imagenet example](https://github.com/pytorch/examples/tree/master/imagenet) by [PyTorch](https://pytorch.org/) and [pytorch-image-models](https://github.com/rwightman/pytorch-image-models) by [Ross Wightman](https://github.com/rwightman)
