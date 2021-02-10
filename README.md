@@ -1,12 +1,17 @@
 # Tokens-to-Token ViT: Training Vision Transformers from Scratch on ImageNet, [arxiv](https://arxiv.org/abs/2101.11986)
 
-### Update: 2020/02/02: About the GPU memory problem. 
+### Update: 2020/02/10:
 
-We will release the implementation of Performer layer in T2T module next week. Currently, all models taking Transformer layer cause very high GPU memory as it needs huge memory to save the attention map in T2T module. After we release the Performer implementations, you can run our T2T-ViT in your 12G GPUs. 
+1. Update the codes of feature visualization and attention map. 
+
+2. I will update token_performer.py in this week, then you can run our T2T-ViT in your 12G GPUs.
 
 
 
-![](images/f1.png)
+
+<p align="center">
+<img src="https://github.com/yitu-opensource/T2T-ViT/blob/main/images/f1.png">
+</p>
 
 Our codes are based on the [official imagenet example](https://github.com/pytorch/examples/tree/master/imagenet) by [PyTorch](https://pytorch.org/) and [pytorch-image-models](https://github.com/rwightman/pytorch-image-models) by [Ross Wightman](https://github.com/rwightman)
 
@@ -64,9 +69,30 @@ Train the T2T-ViT_t-24 (take transformer in T2T transformer):
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_t_24 -b 64 --lr 5e-4 --weight-decay .05 --img-size 224
 ```
 
+## Visualization
+
+Visualize the image features of ResNet50, you can open and run the [visualization-resnet.ipynb](https://github.com/yitu-opensource/T2T-ViT/blob/8cf18b1c99f8622292a897242240c31f87ac4489/visualization_resnet.ipynb) file in jupyter notebook or jupyter lab; some results are given as following:
+
+<p align="center">
+<img src="https://github.com/yitu-opensource/T2T-ViT/blob/main/images/resnet_conv1.png" width="600" height="300"/>
+</p>
+
+Visualize the image features of ViT, you can open and run the [visualization-vit.ipynb](https://github.com/yitu-opensource/T2T-ViT/blob/8cf18b1c99f8622292a897242240c31f87ac4489/visualization-vit.ipynb) file in jupyter notebook or jupyter lab; some results are given as following:
+
+<p align="center">
+<img src="https://github.com/yitu-opensource/T2T-ViT/blob/main/images/vit_block1.png" width="600" height="300"/>
+</p>
+
+Visualize attention map, you can refer to this [file](https://github.com/jeonsworld/ViT-pytorch/blob/main/visualize_attention_map.ipynb). A simple example by visualizing the attention map in attention block 4 and 5 is:
+
+
+<p align="center">
+<img src="https://github.com/yitu-opensource/T2T-ViT/blob/main/images/attention_visualization.png" width="600" height="400"/>
+</p>
+
+
 
 Updating...
-
 
 ## Reference
 If you find this repo useful, please consider citing:
