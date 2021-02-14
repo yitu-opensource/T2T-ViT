@@ -1,10 +1,8 @@
 # Tokens-to-Token ViT: Training Vision Transformers from Scratch on ImageNet, [arxiv](https://arxiv.org/abs/2101.11986)
 
-### Update: 2020/02/10:
+### Update: 2020/02/14:
 
-1. Update the codes of feature visualization and attention map. 
-
-2. I will update token_performer.py in this week, then you can run our T2T-ViT in your 12G GPUs.
+Update token_performer.py, now t2t-vit-7 can be trained with 4 GPUs with 12G memory,other T2T-ViT also can be trained with 4 or 8 GPUs.
 
 
 
@@ -31,25 +29,37 @@ pyyaml
 
 | Model    | T2T Transformer | Top1 Acc | #params |  Download|
 | :---     |   :---:         |  :---:   |  :---:  |  :---:  | 
+| T2T-ViT-7    |  Performer  |   71.1   |  4.2M  | [coming]()| 
+| T2T-ViT-10   |  Performer  |   74.1   |  5.9M  | [coming]()| 
+| T2T-ViT-12   |  Performer  |   75.5   |  6.9M  | [here](https://drive.google.com/file/d/1TEPc84jOYDZ7E2xTsq6nB5ffA7C-w9Cy/view?usp=sharing)  |
+| T2T-ViT-14   |  Performer  |   80.6   |  21.5M | [here](https://drive.google.com/file/d/1zTXtcGwIS_AmPqhUDACYDITDmnNP2yLI/view?usp=sharing)| 
+| T2T-ViT-19   |  Performer  |   81.4   |  39.0M | [here](https://drive.google.com/file/d/1uXOXQ44wNvHOpQxL39jkpcexJv5wH6DG/view?usp=sharing)| 
+| T2T-ViT-24   |  Performer  |   81.8   |  64.1M | [here](https://drive.google.com/file/d/1XujowogyGVR81EsUsYAwlJeeZjERrOd0/view?usp=sharing)| 
 | T2T-ViT_t-14 | Transformer |   80.7   |  21.5M | [here](https://drive.google.com/file/d/1GG_hOMwC_ceDt_FqlESQ8QhCHATLfIJC/view?usp=sharing)  | 
-| T2T-ViT_t-19 | Transformer |   81.75   |  39.0M | [here](https://drive.google.com/file/d/1GdTwGuvZKiZTs4euAmEvRwT_czDOKKqJ/view?usp=sharing) | 
+| T2T-ViT_t-19 | Transformer |   81.75  |  39.0M | [here](https://drive.google.com/file/d/1GdTwGuvZKiZTs4euAmEvRwT_czDOKKqJ/view?usp=sharing) | 
 | T2T-ViT_t-24 | Transformer |   82.2   |  64.1M | [here](https://drive.google.com/file/d/1Edw9jFasXFl5LVrRvJ44vMuQXOlvbDJP/view?usp=sharing) | 
-| T2T-ViT-7    |  Performer  |   71.2   |  4.2M  | [here](https://drive.google.com/file/d/1nmp77cSrGfE1CeW_aUAFihfxmz4AWAcT/view?usp=sharing)| 
-| T2T-ViT-10   |  Performer  |   74.1   |  5.8M  | [here](https://drive.google.com/file/d/1mn4Qyl-WfmytDSB530Nb0ie3Y5DMCzM_/view?usp=sharing)  | 
-| T2T-ViT-12   |  Performer  |   75.5   |  6.8M  | [here](https://drive.google.com/file/d/1LMnlAFJsKnQLfbqX0vYs4n30H4DfXuI8/view?usp=sharing)  | 
+
 
 
 ## Test
 
-Test the T2T-ViT_t-14 (take transformer in T2T transformer),
+Test the T2T-ViT-12 (take Performer in T2T transformer),
 
-Download the [T2T-ViT_t-14](https://drive.google.com/file/d/1GG_hOMwC_ceDt_FqlESQ8QhCHATLfIJC/view?usp=sharing), then test it by running:
+Download the [T2T-ViT-12](https://drive.google.com/file/d/1TEPc84jOYDZ7E2xTsq6nB5ffA7C-w9Cy/view?usp=sharing), then test it by running:
 
 ```
-CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_t_14 -b 100 --eval_checkpoint path/to/checkpoint
+CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_12 -b 100 --eval_checkpoint path/to/checkpoint
 ```
 
-Test the T2T-ViT_t-24 (take transformer in T2T transformer),
+Test the T2T-ViT-14 (take Performer in T2T transformer),
+
+Download the [T2T-ViT-14](https://drive.google.com/file/d/1zTXtcGwIS_AmPqhUDACYDITDmnNP2yLI/view?usp=sharing), then test it by running:
+
+```
+CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_14 -b 100 --eval_checkpoint path/to/checkpoint
+```
+
+Test the T2T-ViT_t-24 (take Transformer in T2T transformer),
 
 Download the [T2T-ViT_t-24](https://drive.google.com/file/d/1Edw9jFasXFl5LVrRvJ44vMuQXOlvbDJP/view?usp=sharing), then test it by running:
 
@@ -59,15 +69,24 @@ CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_t_24 -b 100 -
 
 ## Train
 
-Train the T2T-ViT_t-14 (take transformer in T2T transformer):
+
+Train the T2T-ViT-14 or T2T-ViT-19 or T2T-ViT-24 (take Performer in T2T transformer):
+
+```
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_14 -b 64 --lr 5e-4 --weight-decay .05 --img-size 224
+```
+
+Train the T2T-ViT-12 (take Performer in T2T transformer):
+```
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_12 -b 64 --lr 5e-4 --weight-decay .035 --cutmix 0.0 --reprob 0.25 --img-size 224
+```
+
+Train the T2T-ViT_t-14, T2T-ViT_t-19 or T2T-ViT_t-24 (take Transformer in T2T transformer):
 ```
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_t_14 -b 64 --lr 5e-4 --weight-decay .05 --img-size 224
 ```
 
-Train the T2T-ViT_t-24 (take transformer in T2T transformer):
-```
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_t_24 -b 64 --lr 5e-4 --weight-decay .05 --img-size 224
-```
+
 
 ## Visualization
 
