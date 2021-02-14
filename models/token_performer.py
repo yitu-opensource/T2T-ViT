@@ -39,8 +39,7 @@ class Token_performer(nn.Module):
         # therefore return exp(w^Tx - |x|/2)/sqrt(m)
         xd = ((x * x).sum(dim=-1, keepdim=True)).repeat(1, 1, self.m) / 2
         wtx = torch.einsum('bti,mi->btm', x.float(), self.w)
-        #wtxd = wtx - xd
-        #return torch.exp(wtxd - torch.max(wtxd, dim=-1, keepdim=True).values + self.epsilon) / math.sqrt(self.m)
+
         return torch.exp(wtx - xd) / math.sqrt(self.m)
 
     def single_attn(self, x):
