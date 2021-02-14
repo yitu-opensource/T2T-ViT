@@ -1,8 +1,3 @@
-# Copyright (c) [2012]-[2021] Shanghai Yitu Technology Co., Ltd.
-#
-# This source code is licensed under the Clear BSD License
-# LICENSE file in the root directory of this file
-# All rights reserved.
 """
 T2T-ViT
 """
@@ -28,15 +23,15 @@ def _cfg(url='', **kwargs):
     }
 
 default_cfgs = {
-    'T2t_vit_t_14': _cfg(),
-    'T2t_vit_t_19': _cfg(),
-    'T2t_vit_t_24': _cfg(),
-    'T2t_vit_14': _cfg(),
-    'T2t_vit_19': _cfg(),
-    'T2t_vit_24': _cfg(),
     'T2t_vit_7': _cfg(),
     'T2t_vit_10': _cfg(),
     'T2t_vit_12': _cfg(),
+    'T2t_vit_14': _cfg(),
+    'T2t_vit_19': _cfg(),
+    'T2t_vit_24': _cfg(),
+    'T2t_vit_t_14': _cfg(),
+    'T2t_vit_t_19': _cfg(),
+    'T2t_vit_t_24': _cfg(),
     'T2t_vit_14_resnext': _cfg(),
     'T2t_vit_14_wide': _cfg(),
 }
@@ -64,8 +59,10 @@ class T2T_module(nn.Module):
             self.soft_split1 = nn.Unfold(kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
             self.soft_split2 = nn.Unfold(kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
 
-            self.attention1 = Token_performer(dim=token_dim, in_dim=in_chans*7*7, kernel_ratio=0.5)
-            self.attention2 = Token_performer(dim=token_dim, in_dim=token_dim*3*3, kernel_ratio=0.5)
+            #self.attention1 = Token_performer(dim=token_dim, in_dim=in_chans*7*7, kernel_ratio=0.5)
+            #self.attention2 = Token_performer(dim=token_dim, in_dim=token_dim*3*3, kernel_ratio=0.5)
+            self.attention1 = Token_performer(dim=in_chans*7*7, in_dim=token_dim, kernel_ratio=0.5)
+            self.attention2 = Token_performer(dim=token_dim*3*3, in_dim=token_dim, kernel_ratio=0.5)
             self.project = nn.Linear(token_dim * 3 * 3, embed_dim)
 
         elif tokens_type == 'convolution':  # just for comparison with conolution, not our model
@@ -81,14 +78,14 @@ class T2T_module(nn.Module):
         # step0: soft split
         x = self.soft_split0(x).transpose(1, 2)
 
-        # iteration1: restricturization/reconstruction
+        # iteration1: re-structurization/reconstruction
         x = self.attention1(x)
         B, new_HW, C = x.shape
         x = x.transpose(1,2).reshape(B, C, int(np.sqrt(new_HW)), int(np.sqrt(new_HW)))
         # iteration1: soft split
         x = self.soft_split1(x).transpose(1, 2)
 
-        # iteration2: restricturization/reconstruction
+        # iteration2: re-structurization/reconstruction
         x = self.attention2(x)
         B, new_HW, C = x.shape
         x = x.transpose(1, 2).reshape(B, C, int(np.sqrt(new_HW)), int(np.sqrt(new_HW)))
@@ -103,13 +100,13 @@ class T2T_module(nn.Module):
 class T2T_ViT(nn.Module):
     def __init__(self, img_size=224, tokens_type='performer', in_chans=3, num_classes=1000, embed_dim=768, depth=12,
                  num_heads=12, mlp_ratio=4., qkv_bias=False, qk_scale=None, drop_rate=0., attn_drop_rate=0.,
-                 drop_path_rate=0., norm_layer=nn.LayerNorm):
+                 drop_path_rate=0., norm_layer=nn.LayerNorm, token_dim=64):
         super().__init__()
         self.num_classes = num_classes
         self.num_features = self.embed_dim = embed_dim  # num_features for consistency with other models
 
         self.tokens_to_token = T2T_module(
-                img_size=img_size, tokens_type=tokens_type, in_chans=in_chans, embed_dim=embed_dim)
+                img_size=img_size, tokens_type=tokens_type, in_chans=in_chans, embed_dim=embed_dim, token_dim=token_dim)
         num_patches = self.tokens_to_token.num_patches
 
         self.cls_token = nn.Parameter(torch.zeros(1, 1, embed_dim))
@@ -169,41 +166,6 @@ class T2T_ViT(nn.Module):
         x = self.forward_features(x)
         x = self.head(x)
         return x
-
-
-@register_model
-def T2t_vit_t_14(pretrained=False, **kwargs):  # adopt transformers for tokens to token
-    if pretrained:
-        kwargs.setdefault('qk_scale', 384 ** -0.5)
-    model = T2T_ViT(tokens_type='transformer', embed_dim=384, depth=14, num_heads=6, mlp_ratio=3., **kwargs)
-    model.default_cfg = default_cfgs['T2t_vit_t_14']
-    if pretrained:
-        load_pretrained(
-            model, num_classes=model.num_classes, in_chans=kwargs.get('in_chans', 3))
-    return model
-
-@register_model
-def T2t_vit_t_19(pretrained=False, **kwargs):  # adopt transformers for tokens to token
-    if pretrained:
-        kwargs.setdefault('qk_scale', 448 ** -0.5)
-    model = T2T_ViT(tokens_type='transformer', embed_dim=448, depth=19, num_heads=7, mlp_ratio=3., **kwargs)
-    model.default_cfg = default_cfgs['T2t_vit_t_19']
-    if pretrained:
-        load_pretrained(
-            model, num_classes=model.num_classes, in_chans=kwargs.get('in_chans', 3))
-    return model
-
-@register_model
-def T2t_vit_t_24(pretrained=False, **kwargs):  # adopt transformers for tokens to token
-    if pretrained:
-        kwargs.setdefault('qk_scale', 512 ** -0.5)
-    model = T2T_ViT(tokens_type='transformer', embed_dim=512, depth=24, num_heads=8, mlp_ratio=3., **kwargs)
-    model.default_cfg = default_cfgs['T2t_vit_t_24']
-    if pretrained:
-        load_pretrained(
-            model, num_classes=model.num_classes, in_chans=kwargs.get('in_chans', 3))
-    return model
-
 
 @register_model
 def T2t_vit_7(pretrained=False, **kwargs): # adopt performer for tokens to token
@@ -272,6 +234,38 @@ def T2t_vit_24(pretrained=False, **kwargs): # adopt performer for tokens to toke
             model, num_classes=model.num_classes, in_chans=kwargs.get('in_chans', 3))
     return model
 
+@register_model
+def T2t_vit_t_14(pretrained=False, **kwargs):  # adopt transformers for tokens to token
+    if pretrained:
+        kwargs.setdefault('qk_scale', 384 ** -0.5)
+    model = T2T_ViT(tokens_type='transformer', embed_dim=384, depth=14, num_heads=6, mlp_ratio=3., **kwargs)
+    model.default_cfg = default_cfgs['T2t_vit_t_14']
+    if pretrained:
+        load_pretrained(
+            model, num_classes=model.num_classes, in_chans=kwargs.get('in_chans', 3))
+    return model
+
+@register_model
+def T2t_vit_t_19(pretrained=False, **kwargs):  # adopt transformers for tokens to token
+    if pretrained:
+        kwargs.setdefault('qk_scale', 448 ** -0.5)
+    model = T2T_ViT(tokens_type='transformer', embed_dim=448, depth=19, num_heads=7, mlp_ratio=3., **kwargs)
+    model.default_cfg = default_cfgs['T2t_vit_t_19']
+    if pretrained:
+        load_pretrained(
+            model, num_classes=model.num_classes, in_chans=kwargs.get('in_chans', 3))
+    return model
+
+@register_model
+def T2t_vit_t_24(pretrained=False, **kwargs):  # adopt transformers for tokens to token
+    if pretrained:
+        kwargs.setdefault('qk_scale', 512 ** -0.5)
+    model = T2T_ViT(tokens_type='transformer', embed_dim=512, depth=24, num_heads=8, mlp_ratio=3., **kwargs)
+    model.default_cfg = default_cfgs['T2t_vit_t_24']
+    if pretrained:
+        load_pretrained(
+            model, num_classes=model.num_classes, in_chans=kwargs.get('in_chans', 3))
+    return model
 
 # rexnext and wide structure
 @register_model
