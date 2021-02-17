@@ -29,9 +29,9 @@ pyyaml
 
 | Model    | T2T Transformer | Top1 Acc | #params |  Download|
 | :---     |   :---:         |  :---:   |  :---:  |  :---:  | 
-| T2T-ViT-7    |  Performer  |   71.1   |  4.2M  | [coming]()| 
-| T2T-ViT-10   |  Performer  |   74.1   |  5.9M  | [coming]()| 
-| T2T-ViT-12   |  Performer  |   75.5   |  6.9M  | [here](https://drive.google.com/file/d/1TEPc84jOYDZ7E2xTsq6nB5ffA7C-w9Cy/view?usp=sharing)  |
+| T2T-ViT-7    |  Performer  |   71.3   |  4.3M  | [here](https://drive.google.com/file/d/1gTvmvUhdjTNJpgEKJ-iqEhChdKWCFU3M/view?usp=sharing)| 
+| T2T-ViT-10   |  Performer  |   74.0   |  5.9M  | [here](https://drive.google.com/file/d/1s_cTYsUcPWhhdDXxn4CvpA-G7u-OpGgX/view?usp=sharing)| 
+| T2T-ViT-12   |  Performer  |   75.6   |  6.9M  | [here](https://drive.google.com/file/d/1uldU_G3oawOF8hWuZEGRuL1lxjbU58Ly/view?usp=sharing)  |
 | T2T-ViT-14   |  Performer  |   80.6   |  21.5M | [here](https://drive.google.com/file/d/1zTXtcGwIS_AmPqhUDACYDITDmnNP2yLI/view?usp=sharing)| 
 | T2T-ViT-19   |  Performer  |   81.4   |  39.0M | [here](https://drive.google.com/file/d/1uXOXQ44wNvHOpQxL39jkpcexJv5wH6DG/view?usp=sharing)| 
 | T2T-ViT-24   |  Performer  |   81.8   |  64.1M | [here](https://drive.google.com/file/d/1XujowogyGVR81EsUsYAwlJeeZjERrOd0/view?usp=sharing)| 
@@ -43,12 +43,12 @@ pyyaml
 
 ## Test
 
-Test the T2T-ViT-12 (take Performer in T2T transformer),
+Test the T2T-ViT-7 or T2T-ViT-12 (take Performer in T2T transformer),
 
-Download the [T2T-ViT-12](https://drive.google.com/file/d/1TEPc84jOYDZ7E2xTsq6nB5ffA7C-w9Cy/view?usp=sharing), then test it by running:
+Download the [T2T-ViT-7](https://drive.google.com/file/d/1gTvmvUhdjTNJpgEKJ-iqEhChdKWCFU3M/view?usp=sharing) or [T2T-ViT-12](https://drive.google.com/file/d/1uldU_G3oawOF8hWuZEGRuL1lxjbU58Ly/view?usp=sharing), then test it by running:
 
 ```
-CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_12 -b 100 --eval_checkpoint path/to/checkpoint
+CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_7 -b 100 --eval_checkpoint path/to/checkpoint
 ```
 
 Test the T2T-ViT-14 (take Performer in T2T transformer),
@@ -69,6 +69,21 @@ CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_t_24 -b 100 -
 
 ## Train
 
+Train the T2T-ViT-7 and T2T-ViT-12 (take Performer in T2T transformer):
+
+If only 4 GPUs are available,
+
+```
+CUDA_VISIBLE_DEVICES=0,1,2,3 ./distributed_train.sh 4 path/to/data --model T2t_vit_7 -b 128 --lr 1e-3 --weight-decay .03 --cutmix 0.0 --reprob 0.25 --img-size 224
+```
+
+The top1-acc in 4 GPUs would be slightly lower than 8 GPUs (around 0.1%-0.3% lower).
+
+If 8 GPUs are available: 
+```
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_7 -b 64 --lr 1e-3 --weight-decay .03 --cutmix 0.0 --reprob 0.25 --img-size 224
+```
+
 
 Train the T2T-ViT-14 or T2T-ViT-19 or T2T-ViT-24 (take Performer in T2T transformer):
 
@@ -76,10 +91,6 @@ Train the T2T-ViT-14 or T2T-ViT-19 or T2T-ViT-24 (take Performer in T2T transfor
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_14 -b 64 --lr 5e-4 --weight-decay .05 --img-size 224
 ```
 
-Train the T2T-ViT-12 (take Performer in T2T transformer):
-```
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_12 -b 64 --lr 5e-4 --weight-decay .035 --cutmix 0.0 --reprob 0.25 --img-size 224
-```
 
 Train the T2T-ViT_t-14, T2T-ViT_t-19 or T2T-ViT_t-24 (take Transformer in T2T transformer):
 ```
@@ -90,13 +101,13 @@ CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --mod
 
 ## Visualization
 
-Visualize the image features of ResNet50, you can open and run the [visualization-resnet.ipynb](https://github.com/yitu-opensource/T2T-ViT/blob/8cf18b1c99f8622292a897242240c31f87ac4489/visualization_resnet.ipynb) file in jupyter notebook or jupyter lab; some results are given as following:
+Visualize the image features of ResNet50, you can open and run the [visualization_resnet.ipynb](https://github.com/yitu-opensource/T2T-ViT/blob/main/visualization_resnet.ipynb) file in jupyter notebook or jupyter lab; some results are given as following:
 
 <p align="center">
 <img src="https://github.com/yitu-opensource/T2T-ViT/blob/main/images/resnet_conv1.png" width="600" height="300"/>
 </p>
 
-Visualize the image features of ViT, you can open and run the [visualization-vit.ipynb](https://github.com/yitu-opensource/T2T-ViT/blob/8cf18b1c99f8622292a897242240c31f87ac4489/visualization-vit.ipynb) file in jupyter notebook or jupyter lab; some results are given as following:
+Visualize the image features of ViT, you can open and run the [visualization_vit.ipynb](https://github.com/yitu-opensource/T2T-ViT/blob/main/visualization_vit.ipynb) file in jupyter notebook or jupyter lab; some results are given as following:
 
 <p align="center">
 <img src="https://github.com/yitu-opensource/T2T-ViT/blob/main/images/vit_block1.png" width="600" height="300"/>
