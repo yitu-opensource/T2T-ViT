@@ -1,10 +1,14 @@
 # Tokens-to-Token ViT: Training Vision Transformers from Scratch on ImageNet, [arxiv](https://arxiv.org/abs/2101.11986)
 
-### Update 2020/02/18: we update some new results and new MACs for our T2T-ViT models, and update Figure1 accordingly in this repo. These new results will be updated in next arxiv version.
+### Update:
 
-### Update 2020/02/14: we update token_performer.py, now T2T-ViT-7, T2T-ViT-10, T2T-ViT-12 can be trained on 4 GPUs with 12G memory, other T2T-ViT also can be trained on 4 or 8 GPUs.
+2020/02/21: our T2T-ViT can be trained on most of common GPUs such as 1080Ti, 2080Ti, TiTAN V, V100 stably with '--amp' (Automatic Mixed Precision). In some specifical GPU like Tesla T4, 'amp' would cause NAN loss when training T2T-ViT. If you get NAN loss in training, you can disable amp by removing '--amp' in the [training scripts](https://github.com/yitu-opensource/T2T-ViT#train).
 
+2020/02/18: we update some new results and new MACs for our T2T-ViT models, and update Figure1 accordingly in this repo. These new results will be updated in next arxiv version.
 
+2020/02/14: we update token_performer.py, now T2T-ViT-7, T2T-ViT-10, T2T-ViT-12 can be trained on 4 GPUs with 12G memory, other T2T-ViT also can be trained on 4 or 8 GPUs.
+
+2020/01/28: we upload most of the pretrained models of T2T-ViT. The others will be uploed soon.
 
 <p align="center">
 <img src="https://github.com/yitu-opensource/T2T-ViT/blob/main/images/f1.png">
@@ -74,33 +78,33 @@ Train the T2T-ViT-7 and T2T-ViT-12 (take Performer in T2T module):
 If only 4 GPUs are available,
 
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3 ./distributed_train.sh 4 path/to/data --model T2t_vit_7 -b 128 --lr 1e-3 --weight-decay .03 --cutmix 0.0 --reprob 0.25 --img-size 224
+CUDA_VISIBLE_DEVICES=0,1,2,3 ./distributed_train.sh 4 path/to/data --model T2t_vit_7 -b 128 --lr 1e-3 --weight-decay .03 --cutmix 0.0 --reprob 0.25 --amp --img-size 224
 ```
 
 The top1-acc in 4 GPUs would be slightly lower than 8 GPUs (around 0.1%-0.3% lower).
 
 If 8 GPUs are available: 
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_7 -b 64 --lr 1e-3 --weight-decay .03 --cutmix 0.0 --reprob 0.25 --img-size 224
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_7 -b 64 --lr 1e-3 --weight-decay .03 --cutmix 0.0 --reprob 0.25 --amp --img-size 224
 ```
 
 
 Train the T2T-ViT-14 or T2T-ViT-19 (take Performer in T2T module):
 
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_14 -b 64 --lr 5e-4 --weight-decay .05 --img-size 224
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_14 -b 64 --lr 5e-4 --weight-decay .05 --amp --img-size 224
 ```
 
 Train the T2T-ViT-24 (take Performer in T2T module):
 
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_24 -b 64 --lr 5e-4 --weight-decay .08 --img-size 224
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_24 -b 64 --lr 5e-4 --weight-decay .08 --amp --img-size 224
 ```
 
 
 Train the T2T-ViT_t-14, T2T-ViT_t-19 or T2T-ViT_t-24 (take Transformer in T2T module):
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_t_14 -b 64 --lr 5e-4 --weight-decay .05 --img-size 224
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_t_14 -b 64 --lr 5e-4 --weight-decay .05 --amp --img-size 224
 ```
 
 
