@@ -2,13 +2,13 @@
 
 ### Update:
 
-2020/02/21: our T2T-ViT can be trained on most of common GPUs such as 1080Ti, 2080Ti, TiTAN V, V100 stably with '--amp' (Automatic Mixed Precision). In some specifical GPU like Tesla T4, 'amp' would cause NAN loss when training T2T-ViT. If you get NAN loss in training, you can disable amp by removing '--amp' in the [training scripts](https://github.com/yitu-opensource/T2T-ViT#train).
+2021/02/21: our T2T-ViT can be trained on most of common GPUs such as 1080Ti, 2080Ti, TiTAN V, V100 stably with '--amp' (Automatic Mixed Precision). In some specifical GPU like Tesla T4, 'amp' would cause NAN loss when training T2T-ViT. If you get NAN loss in training, you can disable amp by removing '--amp' in the [training scripts](https://github.com/yitu-opensource/T2T-ViT#train).
 
-2020/02/18: we update some new results and new MACs for our T2T-ViT models, and update Figure1 accordingly in this repo. These new results will be updated in next arxiv version.
+2021/02/18: we update some new results and new MACs for our T2T-ViT models, and update Figure1 accordingly in this repo. These new results will be updated in next arxiv version.
 
-2020/02/14: we update token_performer.py, now T2T-ViT-7, T2T-ViT-10, T2T-ViT-12 can be trained on 4 GPUs with 12G memory, other T2T-ViT also can be trained on 4 or 8 GPUs.
+2021/02/14: we update token_performer.py, now T2T-ViT-7, T2T-ViT-10, T2T-ViT-12 can be trained on 4 GPUs with 12G memory, other T2T-ViT also can be trained on 4 or 8 GPUs.
 
-2020/01/28: we upload most of the pretrained models of T2T-ViT. The others will be uploed soon.
+2021/01/28: we upload most of the pretrained models of T2T-ViT. The others will be uploed soon.
 
 <p align="center">
 <img src="https://github.com/yitu-opensource/T2T-ViT/blob/main/images/f1.png">
