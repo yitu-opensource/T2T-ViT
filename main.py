@@ -46,7 +46,7 @@ parser = argparse.ArgumentParser(description='T2T-ViT Training and Evaluating')
 # Dataset / Model parameters
 parser.add_argument('data', metavar='DIR',
                     help='path to dataset')
-parser.add_argument('--model', default='resnet101', type=str, metavar='MODEL',
+parser.add_argument('--model', default='T2t_vit_14', type=str, metavar='MODEL',
                     help='Name of model to train (default: "countception"')
 parser.add_argument('--pretrained', action='store_true', default=False,
                     help='Start with pretrained version of specified network (if avail)')
@@ -72,14 +72,14 @@ parser.add_argument('--std', type=float, nargs='+', default=None, metavar='STD',
                     help='Override std deviation of of dataset')
 parser.add_argument('--interpolation', default='', type=str, metavar='NAME',
                     help='Image resize interpolation type (overrides model)')
-parser.add_argument('-b', '--batch-size', type=int, default=32, metavar='N',
-                    help='input batch size for training (default: 32)')
+parser.add_argument('-b', '--batch-size', type=int, default=64, metavar='N',
+                    help='input batch size for training (default: 64)')
 parser.add_argument('-vb', '--validation-batch-size-multiplier', type=int, default=1, metavar='N',
                     help='ratio of validation batch size to training batch size (default: 1)')
 
 # Optimizer parameters
 parser.add_argument('--opt', default='adamw', type=str, metavar='OPTIMIZER',
-                    help='Optimizer (default: "sgd"')
+                    help='Optimizer (default: "adamw"')
 parser.add_argument('--opt-eps', default=None, type=float, metavar='EPSILON',
                     help='Optimizer Epsilon (default: None, use opt default)')
 parser.add_argument('--opt-betas', default=None, type=float, nargs='+', metavar='BETA',
@@ -87,14 +87,14 @@ parser.add_argument('--opt-betas', default=None, type=float, nargs='+', metavar=
 parser.add_argument('--momentum', type=float, default=0.9, metavar='M',
                     help='Optimizer momentum (default: 0.9)')
 parser.add_argument('--weight-decay', type=float, default=0.05,
-                    help='weight decay (default: 0.0001)')
+                    help='weight decay (default: 0.005 for adamw)')
 parser.add_argument('--clip-grad', type=float, default=None, metavar='NORM',
                     help='Clip gradient norm (default: None, no clipping)')
 
 # Learning rate schedule parameters
 parser.add_argument('--sched', default='cosine', type=str, metavar='SCHEDULER',
-                    help='LR scheduler (default: "step"')
-parser.add_argument('--lr', type=float, default=1e-3, metavar='LR',
+                    help='LR scheduler (default: "cosine"')
+parser.add_argument('--lr', type=float, default=5e-4, metavar='LR',
                     help='learning rate (default: 0.01)')
 parser.add_argument('--lr-noise', type=float, nargs='+', default=None, metavar='pct, pct',
                     help='learning rate noise on/off epoch percentages')
@@ -116,7 +116,7 @@ parser.add_argument('--start-epoch', default=None, type=int, metavar='N',
                     help='manual epoch number (useful on restarts)')
 parser.add_argument('--decay-epochs', type=float, default=30, metavar='N',
                     help='epoch interval to decay LR')
-parser.add_argument('--warmup-epochs', type=int, default=3, metavar='N',
+parser.add_argument('--warmup-epochs', type=int, default=5, metavar='N',
                     help='epochs to warmup LR, if scheduler supports')
 parser.add_argument('--cooldown-epochs', type=int, default=10, metavar='N',
                     help='epochs to cooldown LR at min_lr, after cyclic schedule ends')
@@ -144,15 +144,15 @@ parser.add_argument('--aug-splits', type=int, default=0,
                     help='Number of augmentation splits (default: 0, valid: 0 or >=2)')
 parser.add_argument('--jsd', action='store_true', default=False,
                     help='Enable Jensen-Shannon Divergence + CE loss. Use with `--aug-splits`.')
-parser.add_argument('--reprob', type=float, default=0., metavar='PCT',
-                    help='Random erase prob (default: 0.)')
+parser.add_argument('--reprob', type=float, default=0.25, metavar='PCT',
+                    help='Random erase prob (default: 0.25)')
 parser.add_argument('--remode', type=str, default='pixel',
                     help='Random erase mode (default: "const")')
 parser.add_argument('--recount', type=int, default=1,
                     help='Random erase count (default: 1)')
 parser.add_argument('--resplit', action='store_true', default=False,
                     help='Do not random erase first (clean) augmentation split')
-parser.add_argument('--mixup', type=float, default=0.2,
+parser.add_argument('--mixup', type=float, default=0.8,
                     help='mixup alpha, mixup enabled if > 0. (default: 0.)')
 parser.add_argument('--cutmix', type=float, default=1.0,
                     help='cutmix alpha, cutmix enabled if > 0. (default: 0.)')
@@ -170,8 +170,8 @@ parser.add_argument('--smoothing', type=float, default=0.1,
                     help='Label smoothing (default: 0.1)')
 parser.add_argument('--train-interpolation', type=str, default='random',
                     help='Training interpolation (random, bilinear, bicubic default: "random")')
-parser.add_argument('--drop', type=float, default=0.1, metavar='PCT',
-                    help='Dropout rate (default: 0.1)')
+parser.add_argument('--drop', type=float, default=0.0, metavar='PCT',
+                    help='Dropout rate (default: 0.0)')
 parser.add_argument('--drop-connect', type=float, default=None, metavar='PCT',
                     help='Drop connect rate, DEPRECATED, use drop-path (default: None)')
 parser.add_argument('--drop-path', type=float, default=0.1, metavar='PCT',
