@@ -27,6 +27,21 @@ torchvision>=0.5.0
 
 pyyaml
 
+data prepare: ImageNet with the following folder structure:
+
+```
+imagenet/
+....train/
+........calss1/
+............/ img1
+........class2/
+............/ img2
+....val/
+........calss1/
+............/ img1
+........class2/
+............/ img2
+```
 
 ## T2T-ViT Models
 
@@ -50,14 +65,6 @@ The three lite variant of T2T-ViT (Comparing with MobileNets):
 
 ## Validation
 
-Test the T2T-ViT-7 or T2T-ViT-12 (take Performer in T2T module),
-
-Download the [T2T-ViT-7](https://drive.google.com/file/d/1gTvmvUhdjTNJpgEKJ-iqEhChdKWCFU3M/view?usp=sharing) or [T2T-ViT-12](https://drive.google.com/file/d/1uldU_G3oawOF8hWuZEGRuL1lxjbU58Ly/view?usp=sharing), then test it by running:
-
-```
-CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_7 -b 100 --eval_checkpoint path/to/checkpoint
-```
-
 Test the T2T-ViT-14 (take Performer in T2T module),
 
 Download the [T2T-ViT-14](https://drive.google.com/file/d/1zTXtcGwIS_AmPqhUDACYDITDmnNP2yLI/view?usp=sharing), then test it by running:
@@ -65,14 +72,25 @@ Download the [T2T-ViT-14](https://drive.google.com/file/d/1zTXtcGwIS_AmPqhUDACYD
 ```
 CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_14 -b 100 --eval_checkpoint path/to/checkpoint
 ```
-
-Test the T2T-ViT_t-24 (take Transformer in T2T module),
-
-Download the [T2T-ViT_t-24](https://drive.google.com/file/d/1Edw9jFasXFl5LVrRvJ44vMuQXOlvbDJP/view?usp=sharing), then test it by running:
+The results look like:
 
 ```
-CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_t_24 -b 100 --eval_checkpoint path/to/checkpoint
+Test: [   0/499]  Time: 2.083 (2.083)  Loss:  0.3578 (0.3578)  Acc@1: 96.0000 (96.0000)  Acc@5: 99.0000 (99.0000)
+Test: [  50/499]  Time: 0.166 (0.202)  Loss:  0.5823 (0.6404)  Acc@1: 85.0000 (86.1569)  Acc@5: 99.0000 (97.5098)
+...
+Test: [ 499/499]  Time: 0.272 (0.172)  Loss:  1.3983 (0.8261)  Acc@1: 62.0000 (81.5000)  Acc@5: 93.0000 (95.6660)
+Top-1 accuracy of the model is: 81.5%
+
 ```
+
+Test the three lite variants: T2T-ViT-7, T2T-ViT-10, T2T-ViT-12 (take Performer in T2T module),
+
+Download the [T2T-ViT-7](https://drive.google.com/file/d/1r2Qs6MVo3fkPWwQ0hZfK4nfl6HErgdjJ/view?usp=sharing), [T2T-ViT-10](https://drive.google.com/file/d/11v9UdXx_jw7E-lIO26MI9c29ANC2GUgw/view?usp=sharing) or [T2T-ViT-12](https://drive.google.com/file/d/1RnPvXX6HFdQ3O6B6WM1t8_SDDVBIeV6c/view?usp=sharing), then test it by running:
+
+```
+CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_7 -b 100 --eval_checkpoint path/to/checkpoint
+```
+
 
 ## Train
 
@@ -128,8 +146,6 @@ Visualize attention map, you can refer to this [file](https://github.com/jeonswo
 </p>
 
 
-
-Updating...
 
 ## Reference
 If you find this repo useful, please consider citing:
