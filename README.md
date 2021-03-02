@@ -1,10 +1,10 @@
 # Tokens-to-Token ViT: Training Vision Transformers from Scratch on ImageNet, [arxiv](https://arxiv.org/abs/2101.11986)
 
 ### Update:
+2021/03/02: we update our new results. Now our T2T-ViT-14 with 21.5M parameters can reach 81.5% top1-acc by training from scratch on ImageNet. 
 
 2021/02/21: our T2T-ViT can be trained on most of common GPUs such as 1080Ti, 2080Ti, TiTAN V, V100 stably with '--amp' (Automatic Mixed Precision). In some specifical GPU like Tesla T4, 'amp' would cause NAN loss when training T2T-ViT. If you get NAN loss in training, you can disable amp by removing '--amp' in the [training scripts](https://github.com/yitu-opensource/T2T-ViT#train).
 
-2021/02/18: we update some new results and new MACs for our T2T-ViT models, and update Figure1 accordingly in this repo. These new results will be updated in next arxiv version.
 
 2021/02/14: we update token_performer.py, now T2T-ViT-7, T2T-ViT-10, T2T-ViT-12 can be trained on 4 GPUs with 12G memory, other T2T-ViT also can be trained on 4 or 8 GPUs.
 
@@ -33,16 +33,19 @@ pyyaml
 
 | Model    | T2T Transformer | Top1 Acc | #params | MACs |  Download|
 | :---     |   :---:         |  :---:   |  :---:  | :---: |  :---:   | 
-| T2T-ViT-7    |  Performer  |   71.3   |  4.3M   | 1.5G  | [here](https://drive.google.com/file/d/1gTvmvUhdjTNJpgEKJ-iqEhChdKWCFU3M/view?usp=sharing)| 
-| T2T-ViT-10   |  Performer  |   74.0   |  5.9M   | 1.8G  | [here](https://drive.google.com/file/d/1s_cTYsUcPWhhdDXxn4CvpA-G7u-OpGgX/view?usp=sharing)| 
-| T2T-ViT-12   |  Performer  |   75.6   |  6.9M   | 2.2G  | [here](https://drive.google.com/file/d/1uldU_G3oawOF8hWuZEGRuL1lxjbU58Ly/view?usp=sharing)  |
-| T2T-ViT-14   |  Performer  |   80.6   |  21.5M  | 5.2G  | [here](https://drive.google.com/file/d/1zTXtcGwIS_AmPqhUDACYDITDmnNP2yLI/view?usp=sharing)| 
-| T2T-ViT-19   |  Performer  |   81.4   |  39.0M  | 8.9G  | [here](https://drive.google.com/file/d/1uXOXQ44wNvHOpQxL39jkpcexJv5wH6DG/view?usp=sharing)| 
-| T2T-ViT-24   |  Performer  |   82.1   |  64.1M  | 14.1G  | [comming]()| 
-| T2T-ViT_t-14 | Transformer |   80.7   |  21.5M  | 6.1G | [here](https://drive.google.com/file/d/1GG_hOMwC_ceDt_FqlESQ8QhCHATLfIJC/view?usp=sharing)  | 
-| T2T-ViT_t-19 | Transformer |   81.8   |  39.0M  | 9.8G  | [here](https://drive.google.com/file/d/1GdTwGuvZKiZTs4euAmEvRwT_czDOKKqJ/view?usp=sharing) | 
-| T2T-ViT_t-24 | Transformer |   82.2   |  64.1M  | 15.0G| [here](https://drive.google.com/file/d/1Edw9jFasXFl5LVrRvJ44vMuQXOlvbDJP/view?usp=sharing) | 
+| T2T-ViT-14   |  Performer  |   81.5   |  21.5M  | 5.2G  | [here](https://drive.google.com/file/d/19Dw1HGYkOPSwcoLZdTkmWPOMzrFMYLgN/view?usp=sharing)| 
+| T2T-ViT-19   |  Performer  |   81.9   |  39.0M  | 8.9G  | [here](https://drive.google.com/file/d/1Wb476W-49TngNsXjBXChV7F2RdFv0wAA/view?usp=sharing)| 
+| T2T-ViT-24   |  Performer  |   82.2   |  64.1M  | 14.1G  | [here](https://drive.google.com/file/d/1veaOABX9YmjriVYkTy2cKySiSsopxxWf/view?usp=sharing)| 
+| T2T-ViT_t-14 | Transformer |   81.7   |  21.5M  | 6.1G | [here](https://drive.google.com/file/d/1WdUT-3qq3duhECKk1CabXGktvd24p3Ti/view?usp=sharing)  | 
+| T2T-ViT_t-19 | Transformer |   82.4   |  39.0M  | 9.8G  | [here](https://drive.google.com/file/d/1HA15Mh7ID2XuxBilSddc5ccAggf1CD8u/view?usp=sharing) | 
+| T2T-ViT_t-24 | Transformer |       |  64.1M  | 15.0G| [comming]() | 
 
+The three lite variant of T2T-ViT (Comparing with MobileNets):
+| Model    | T2T Transformer | Top1 Acc | #params | MACs |  Download|
+| :---     |   :---:         |  :---:   |  :---:  | :---: |  :---:   | 
+| T2T-ViT-7   |  Performer  |   71.7   |  4.3M   | 1.2G  | [here](https://drive.google.com/file/d/1r2Qs6MVo3fkPWwQ0hZfK4nfl6HErgdjJ/view?usp=sharing)| 
+| T2T-ViT-10   |  Performer  |   75.2   |  5.9M   | 1.8G  | [here](https://drive.google.com/file/d/11v9UdXx_jw7E-lIO26MI9c29ANC2GUgw/view?usp=sharing)| 
+| T2T-ViT-12   |  Performer  |   76.5   |  6.9M   | 2.2G  | [here](https://drive.google.com/file/d/1RnPvXX6HFdQ3O6B6WM1t8_SDDVBIeV6c/view?usp=sharing)  |
 
 
 ## Validation
@@ -73,38 +76,32 @@ CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_t_24 -b 100 -
 
 ## Train
 
-Train the T2T-ViT-7 and T2T-ViT-12 (take Performer in T2T module):
+Train the three lite variants: T2T-ViT-7, T2T-ViT-10 and T2T-ViT-12 (take Performer in T2T module):
 
 If only 4 GPUs are available,
 
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3 ./distributed_train.sh 4 path/to/data --model T2t_vit_7 -b 128 --lr 1e-3 --weight-decay .03 --cutmix 0.0 --reprob 0.25 --amp --img-size 224
+CUDA_VISIBLE_DEVICES=0,1,2,3 ./distributed_train.sh 4 path/to/data --model T2t_vit_7 -b 128 --lr 1e-3 --weight-decay .03 --amp --img-size 224
 ```
 
 The top1-acc in 4 GPUs would be slightly lower than 8 GPUs (around 0.1%-0.3% lower).
 
 If 8 GPUs are available: 
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_7 -b 64 --lr 1e-3 --weight-decay .03 --cutmix 0.0 --reprob 0.25 --amp --img-size 224
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_7 -b 64 --lr 1e-3 --weight-decay .03 --amp --img-size 224
 ```
 
 
-Train the T2T-ViT-14 or T2T-ViT-19 (take Performer in T2T module):
+Train the T2T-ViT-14 and T2T-ViT_t-14:
 
 ```
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_14 -b 64 --lr 5e-4 --weight-decay .05 --amp --img-size 224
 ```
 
-Train the T2T-ViT-24 (take Performer in T2T module):
+Train the T2T-ViT-19, T2T-ViT-24 or T2T-ViT_t-19, T2T-ViT_t-24:
 
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_24 -b 64 --lr 5e-4 --weight-decay .08 --amp --img-size 224
-```
-
-
-Train the T2T-ViT_t-14, T2T-ViT_t-19 or T2T-ViT_t-24 (take Transformer in T2T module):
-```
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_t_14 -b 64 --lr 5e-4 --weight-decay .05 --amp --img-size 224
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_19 -b 64 --lr 5e-4 --weight-decay .065 --amp --img-size 224
 ```
 
 
