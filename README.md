@@ -49,11 +49,11 @@ imagenet/
 | Model    | T2T Transformer | Top1 Acc | #params | MACs |  Download|
 | :---     |   :---:         |  :---:   |  :---:  | :---: |  :---:   | 
 | T2T-ViT-14   |  Performer  |   81.5   |  21.5M  | 5.2G  | [here](https://drive.google.com/file/d/19Dw1HGYkOPSwcoLZdTkmWPOMzrFMYLgN/view?usp=sharing)| 
-| T2T-ViT-19   |  Performer  |   81.9   |  39.0M  | 8.9G  | [here](https://drive.google.com/file/d/1Wb476W-49TngNsXjBXChV7F2RdFv0wAA/view?usp=sharing)| 
+| T2T-ViT-19   |  Performer  |   81.9   |  39.2M  | 8.9G  | [here](https://drive.google.com/file/d/1Wb476W-49TngNsXjBXChV7F2RdFv0wAA/view?usp=sharing)| 
 | T2T-ViT-24   |  Performer  |   82.2   |  64.1M  | 14.1G  | [here](https://drive.google.com/file/d/1veaOABX9YmjriVYkTy2cKySiSsopxxWf/view?usp=sharing)| 
 | T2T-ViT_t-14 | Transformer |   81.7   |  21.5M  | 6.1G | [here](https://drive.google.com/file/d/1WdUT-3qq3duhECKk1CabXGktvd24p3Ti/view?usp=sharing)  | 
-| T2T-ViT_t-19 | Transformer |   82.4   |  39.0M  | 9.8G  | [here](https://drive.google.com/file/d/1HA15Mh7ID2XuxBilSddc5ccAggf1CD8u/view?usp=sharing) | 
-| T2T-ViT_t-24 | Transformer |       |  64.1M  | 15.0G| [comming]() | 
+| T2T-ViT_t-19 | Transformer |   82.4   |  39.2M  | 9.8G  | [here](https://drive.google.com/file/d/1HA15Mh7ID2XuxBilSddc5ccAggf1CD8u/view?usp=sharing) | 
+| T2T-ViT_t-24 | Transformer |   82.6   |  64.1M  | 15.0G| [here](https://drive.google.com/file/d/13s9miOQt1Bo7934dyKA3m6MmPauOg5_a/view?usp=sharing) | 
 
 The three lite variant of T2T-ViT (Comparing with MobileNets):
 | Model    | T2T Transformer | Top1 Acc | #params | MACs |  Download|
