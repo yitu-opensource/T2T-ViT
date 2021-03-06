@@ -150,12 +150,10 @@ Visualize attention map, you can refer to this [file](https://github.com/jeonswo
 ## Reference
 If you find this repo useful, please consider citing:
 ```
-@misc{yuan2021tokenstotoken,
-    title={Tokens-to-Token ViT: Training Vision Transformers from Scratch on ImageNet},
-    author={Li Yuan and Yunpeng Chen and Tao Wang and Weihao Yu and Yujun Shi and Francis EH Tay and Jiashi Feng and Shuicheng Yan},
-    year={2021},
-    eprint={2101.11986},
-    archivePrefix={arXiv},
-    primaryClass={cs.CV}
+@article{yuan2021tokens,
+  title={Tokens-to-token vit: Training vision transformers from scratch on imagenet},
+  author={Yuan, Li and Chen, Yunpeng and Wang, Tao and Yu, Weihao and Shi, Yujun and Tay, Francis EH and Feng, Jiashi and Yan, Shuicheng},
+  journal={arXiv preprint arXiv:2101.11986},
+  year={2021}
 }
 ```
