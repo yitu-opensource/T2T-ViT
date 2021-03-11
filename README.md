@@ -16,7 +16,7 @@ Our codes are based on the [official imagenet example](https://github.com/pytorc
 
 ## Requirements
 
-[timm](https://github.com/rwightman/pytorch-image-models), pip install timm
+[timm](https://github.com/rwightman/pytorch-image-models), pip install timm==0.3.4
 
 torch>=1.4.0
 
