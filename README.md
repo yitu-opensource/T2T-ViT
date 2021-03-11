@@ -1,14 +1,11 @@
 # Tokens-to-Token ViT: Training Vision Transformers from Scratch on ImageNet, [arxiv](https://arxiv.org/abs/2101.11986)
 
 ### Update:
-2021/03/02: update our new results. Now T2T-ViT-14 with 21.5M parameters can reach 81.5% top1-acc by training from scratch on ImageNet. 
+2021/03/11: update our new results. Now our T2T-ViT-14 with 21.5M parameters can reach 81.5% top1-acc with 224x224 image resolution, and 83.3\% top1-acc with 384x384 resolution. 
 
-2021/02/21: our T2T-ViT can be trained on most of common GPUs: 1080Ti, 2080Ti, TiTAN V, V100 stably with '--amp' (Automatic Mixed Precision). In some specifical GPU like Tesla T4, 'amp' would cause NAN loss when training T2T-ViT. If you get NAN loss in training, you can disable amp by removing '--amp' in the [training scripts](https://github.com/yitu-opensource/T2T-ViT#train).
+2021/02/21: T2T-ViT can be trained on most of common GPUs: 1080Ti, 2080Ti, TiTAN V, V100 stably with '--amp' (Automatic Mixed Precision). In some specifical GPU like Tesla T4, 'amp' would cause NAN loss when training T2T-ViT. If you get NAN loss in training, you can disable amp by removing '--amp' in the [training scripts](https://github.com/yitu-opensource/T2T-ViT#train).
 
-
-2021/02/14: update token_performer.py, now T2T-ViT-7, T2T-ViT-10, T2T-ViT-12 can be trained on 4 GPUs with 12G memory, other T2T-ViT also can be trained on 4 or 8 GPUs.
-
-2021/01/28: init codes and upload most of the pretrained models of T2T-ViT.
+2021/01/28: release codes and upload most of the pretrained models of T2T-ViT.
 
 <p align="center">
 <img src="https://github.com/yitu-opensource/T2T-ViT/blob/main/images/f1.png">
@@ -27,20 +24,22 @@ torchvision>=0.5.0
 
 pyyaml
 
-data prepare: ImageNet with the following folder structure:
+data prepare: ImageNet with the following folder structure, you can extract imagenet by this [script](https://gist.github.com/BIGBALLON/8a71d225eff18d88e469e6ea9b39cef4).
 
 ```
-imagenet/
-....train/
-........calss1/
-............/ img1
-........class2/
-............/ img2
-....val/
-........calss1/
-............/ img1
-........class2/
-............/ img2
+│imagenet/
+├──train/
+│  ├── n01440764
+│  │   ├── n01440764_10026.JPEG
+│  │   ├── n01440764_10027.JPEG
+│  │   ├── ......
+│  ├── ......
+├──val/
+│  ├── n01440764
+│  │   ├── ILSVRC2012_val_00000293.JPEG
+│  │   ├── ILSVRC2012_val_00002138.JPEG
+│  │   ├── ......
+│  ├── ......
 ```
 
 ## T2T-ViT Models
@@ -48,19 +47,22 @@ imagenet/
 
 | Model    | T2T Transformer | Top1 Acc | #params | MACs |  Download|
 | :---     |   :---:         |  :---:   |  :---:  | :---: |  :---:   | 
-| T2T-ViT-14   |  Performer  |   81.5   |  21.5M  | 5.2G  | [here](https://drive.google.com/file/d/19Dw1HGYkOPSwcoLZdTkmWPOMzrFMYLgN/view?usp=sharing)| 
-| T2T-ViT-19   |  Performer  |   81.9   |  39.2M  | 8.9G  | [here](https://drive.google.com/file/d/1Wb476W-49TngNsXjBXChV7F2RdFv0wAA/view?usp=sharing)| 
-| T2T-ViT-24   |  Performer  |   82.2   |  64.1M  | 14.1G  | [here](https://drive.google.com/file/d/1veaOABX9YmjriVYkTy2cKySiSsopxxWf/view?usp=sharing)| 
-| T2T-ViT_t-14 | Transformer |   81.7   |  21.5M  | 6.1G | [here](https://drive.google.com/file/d/1WdUT-3qq3duhECKk1CabXGktvd24p3Ti/view?usp=sharing)  | 
-| T2T-ViT_t-19 | Transformer |   82.4   |  39.2M  | 9.8G  | [here](https://drive.google.com/file/d/1HA15Mh7ID2XuxBilSddc5ccAggf1CD8u/view?usp=sharing) | 
-| T2T-ViT_t-24 | Transformer |   82.6   |  64.1M  | 15.0G| [here](https://drive.google.com/file/d/13s9miOQt1Bo7934dyKA3m6MmPauOg5_a/view?usp=sharing) | 
+| T2T-ViT-14   |  Performer  |   81.5   |  21.5M  | 5.2G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/81.5_T2T_ViT_14.pth.tar)| 
+| T2T-ViT-19   |  Performer  |   81.9   |  39.2M  | 8.9G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/81.9_T2T_ViT_19.pth.tar)| 
+| T2T-ViT-24   |  Performer  |   82.3   |  64.1M  | 14.1G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/82.3_T2T_ViT_24.pth.tar)| 
+| T2T-ViT-14, 384   |  Performer  |   83.3   |  21.7M  |   | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/83.3_T2T_ViT_14.pth.tar)| 
+| T2T-ViT_t-14 | Transformer |   81.7   |  21.5M  | 6.1G | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/81.7_T2T_ViTt_14.pth.tar)  | 
+| T2T-ViT_t-19 | Transformer |   82.4   |  39.2M  | 9.8G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/82.4_T2T_ViTt_19.pth.tar) | 
+| T2T-ViT_t-24 | Transformer |   82.6   |  64.1M  | 15.0G| [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/82.6_T2T_ViTt_24.pth.tar) | 
 
-The three lite variant of T2T-ViT (Comparing with MobileNets):
+The 'T2T-ViT-14, 384' means we train T2T-ViT-14 with image size of 384 x 384.
+
+The three lite variants of T2T-ViT (Comparing with MobileNets):
 | Model    | T2T Transformer | Top1 Acc | #params | MACs |  Download|
 | :---     |   :---:         |  :---:   |  :---:  | :---: |  :---:   | 
-| T2T-ViT-7   |  Performer  |   71.7   |  4.3M   | 1.2G  | [here](https://drive.google.com/file/d/1r2Qs6MVo3fkPWwQ0hZfK4nfl6HErgdjJ/view?usp=sharing)| 
-| T2T-ViT-10   |  Performer  |   75.2   |  5.9M   | 1.8G  | [here](https://drive.google.com/file/d/11v9UdXx_jw7E-lIO26MI9c29ANC2GUgw/view?usp=sharing)| 
-| T2T-ViT-12   |  Performer  |   76.5   |  6.9M   | 2.2G  | [here](https://drive.google.com/file/d/1RnPvXX6HFdQ3O6B6WM1t8_SDDVBIeV6c/view?usp=sharing)  |
+| T2T-ViT-7   |  Performer  |   71.7   |  4.3M   | 1.2G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/71.7_T2T_ViT_7.pth.tar)| 
+| T2T-ViT-10   |  Performer  |   75.2   |  5.9M   | 1.8G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/75.2_T2T_ViT_10.pth.tar)| 
+| T2T-ViT-12   |  Performer  |   76.5   |  6.9M   | 2.2G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/76.5_T2T_ViT_12.pth.tar)  |
 
 
 ## Validation
@@ -91,6 +93,11 @@ Download the [T2T-ViT-7](https://drive.google.com/file/d/1r2Qs6MVo3fkPWwQ0hZfK4n
 CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_7 -b 100 --eval_checkpoint path/to/checkpoint
 ```
 
+Test the model T2T-ViT-14, 384 with 83.3\% top-1 accuracy: 
+```
+CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_14 --img-size 384 -b 100 --eval_checkpoint path/to/T2T-ViT-14-384 
+```
+
 
 ## Train
 
@@ -115,6 +122,8 @@ Train the T2T-ViT-14 and T2T-ViT_t-14:
 ```
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_14 -b 64 --lr 5e-4 --weight-decay .05 --amp --img-size 224
 ```
+If you want to train our T2T-ViT on images with 384x384 resolution, please use '--img-size 384'.
+
 
 Train the T2T-ViT-19, T2T-ViT-24 or T2T-ViT_t-19, T2T-ViT_t-24:
 
