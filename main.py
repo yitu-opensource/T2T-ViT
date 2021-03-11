@@ -314,7 +314,8 @@ def main():
         bn_tf=args.bn_tf,
         bn_momentum=args.bn_momentum,
         bn_eps=args.bn_eps,
-        checkpoint_path=args.initial_checkpoint)
+        checkpoint_path=args.initial_checkpoint,
+        img_size=args.img_size)
 
     if args.local_rank == 0:
         _logger.info('Model %s created, param count: %d' %
