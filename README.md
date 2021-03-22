@@ -131,7 +131,18 @@ Train the T2T-ViT-19, T2T-ViT-24 or T2T-ViT_t-19, T2T-ViT_t-24:
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_19 -b 64 --lr 5e-4 --weight-decay .065 --amp --img-size 224
 ```
 
+## Transfer T2T-ViT to CIFAR10/CIFAR100
 
+| Model        |  ImageNet | CIFAR10 |  CIFAR100| #params| 
+| :---         |    :---:  | :---:   |  :---:   |   :---:  | 
+| T2T-ViT-14   |   81.5    |[97.5](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/cifar10_t2t-vit-14_97.5.pth)  | [88.4](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/cirfar100_t2t-vit-14_88.4.pth) | 21.5M    | 
+| T2T-ViT-19   |   81.9    |[98.3](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/cifar10_t2t-vit-19_98.3.pth)  | [89.0](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/cifar100_t2t-vit-19_89.0.pth) |39.2M     | 
+
+We resize CIFAR10/100 to 224x224 and finetune our pretrained T2T-ViT-14/19 to CIFAR10/100 by running:
+
+```
+CUDA_VISIBLE_DEVICES=0,1 transfer_learning.py --lr 0.05 --b 64 --num-classes 10 --img-size 224 --transfer-learning True --transfer-model /path/to/pretrained/T2T-ViT-19
+```
 
 ## Visualization
 
