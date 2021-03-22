@@ -11,10 +11,21 @@
 <img src="https://github.com/yitu-opensource/T2T-ViT/blob/main/images/f1.png">
 </p>
 
+## Reference
+If you find this repo useful, please consider citing:
+```
+@article{yuan2021tokens,
+  title={Tokens-to-token vit: Training vision transformers from scratch on imagenet},
+  author={Yuan, Li and Chen, Yunpeng and Wang, Tao and Yu, Weihao and Shi, Yujun and Tay, Francis EH and Feng, Jiashi and Yan, Shuicheng},
+  journal={arXiv preprint arXiv:2101.11986},
+  year={2021}
+}
+```
+
 Our codes are based on the [official imagenet example](https://github.com/pytorch/examples/tree/master/imagenet) by [PyTorch](https://pytorch.org/) and [pytorch-image-models](https://github.com/rwightman/pytorch-image-models) by [Ross Wightman](https://github.com/rwightman)
 
 
-## Requirements
+## 1. Requirements
 
 [timm](https://github.com/rwightman/pytorch-image-models), pip install timm==0.3.4
 
@@ -42,7 +53,7 @@ data prepare: ImageNet with the following folder structure, you can extract imag
 │  ├── ......
 ```
 
-## T2T-ViT Models
+## 2. T2T-ViT Models
 
 
 | Model    | T2T Transformer | Top1 Acc | #params | MACs |  Download|
@@ -65,7 +76,21 @@ The three lite variants of T2T-ViT (Comparing with MobileNets):
 | T2T-ViT-12   |  Performer  |   76.5   |  6.9M   | 2.2G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/76.5_T2T_ViT_12.pth.tar)  |
 
 
-## Validation
+### Usage
+The way to use our pretrained T2T-ViT:
+```
+from models.t2t_vit import *
+from utils import load_for_transfer_learning 
+
+# create model
+model = T2t_vit_14()
+
+# load the preatrained weights
+load_for_transfer_learning(model, /path/to/pretrained/weights, use_ema=True, strict=False, num_classes=1000)  # change num_classes based on dataset
+```
+
+
+## 3. Validation
 
 Test the T2T-ViT-14 (take Performer in T2T module),
 
@@ -99,7 +124,7 @@ CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_14 --img-size
 ```
 
 
-## Train
+## 4. Train
 
 Train the three lite variants: T2T-ViT-7, T2T-ViT-10 and T2T-ViT-12 (take Performer in T2T module):
 
@@ -131,7 +156,7 @@ Train the T2T-ViT-19, T2T-ViT-24 or T2T-ViT_t-19, T2T-ViT_t-24:
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_19 -b 64 --lr 5e-4 --weight-decay .065 --amp --img-size 224
 ```
 
-## Transfer T2T-ViT to CIFAR10/CIFAR100
+## 5. Transfer T2T-ViT to CIFAR10/CIFAR100
 
 | Model        |  ImageNet | CIFAR10 |  CIFAR100| #params| 
 | :---         |    :---:  | :---:   |  :---:   |   :---:  | 
@@ -144,7 +169,7 @@ We resize CIFAR10/100 to 224x224 and finetune our pretrained T2T-ViT-14/19 to CI
 CUDA_VISIBLE_DEVICES=0,1 transfer_learning.py --lr 0.05 --b 64 --num-classes 10 --img-size 224 --transfer-learning True --transfer-model /path/to/pretrained/T2T-ViT-19
 ```
 
-## Visualization
+## 6. Visualization
 
 Visualize the image features of ResNet50, you can open and run the [visualization_resnet.ipynb](https://github.com/yitu-opensource/T2T-ViT/blob/main/visualization_resnet.ipynb) file in jupyter notebook or jupyter lab; some results are given as following:
 
@@ -166,14 +191,3 @@ Visualize attention map, you can refer to this [file](https://github.com/jeonswo
 </p>
 
 
-
-## Reference
-If you find this repo useful, please consider citing:
-```
-@article{yuan2021tokens,
-  title={Tokens-to-token vit: Training vision transformers from scratch on imagenet},
-  author={Yuan, Li and Chen, Yunpeng and Wang, Tao and Yu, Weihao and Shi, Yujun and Tay, Francis EH and Feng, Jiashi and Yan, Shuicheng},
-  journal={arXiv preprint arXiv:2101.11986},
-  year={2021}
-}
-```
