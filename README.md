@@ -160,8 +160,8 @@ CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --mod
 
 | Model        |  ImageNet | CIFAR10 |  CIFAR100| #params| 
 | :---         |    :---:  | :---:   |  :---:   |   :---:  | 
-| T2T-ViT-14   |   81.5    |[97.5](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/cifar10_t2t-vit-14_97.5.pth)  | [88.4](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/cirfar100_t2t-vit-14_88.4.pth) | 21.5M    | 
-| T2T-ViT-19   |   81.9    |[98.3](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/cifar10_t2t-vit-19_98.3.pth)  | [89.0](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/cifar100_t2t-vit-19_89.0.pth) |39.2M     | 
+| T2T-ViT-14   |   81.5    |[98.3](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/cifar10_t2t-vit_14_98.3.pth)  | [88.4](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/cirfar100_t2t-vit-14_88.4.pth) | 21.5M    | 
+| T2T-ViT-19   |   81.9    |[98.4](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/cifar10_t2t-vit_19_98.4.pth)  | [89.0](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/cifar100_t2t-vit-19_89.0.pth) |39.2M     | 
 
 We resize CIFAR10/100 to 224x224 and finetune our pretrained T2T-ViT-14/19 to CIFAR10/100 by running:
 
