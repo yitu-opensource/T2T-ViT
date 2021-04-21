@@ -94,7 +94,7 @@ load_for_transfer_learning(model, /path/to/pretrained/weights, use_ema=True, str
 
 Test the T2T-ViT-14 (take Performer in T2T module),
 
-Download the [T2T-ViT-14](https://drive.google.com/file/d/1zTXtcGwIS_AmPqhUDACYDITDmnNP2yLI/view?usp=sharing), then test it by running:
+Download the [T2T-ViT-14](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/81.5_T2T_ViT_14.pth.tar), then test it by running:
 
 ```
 CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_14 -b 100 --eval_checkpoint path/to/checkpoint
@@ -112,7 +112,7 @@ Top-1 accuracy of the model is: 81.5%
 
 Test the three lite variants: T2T-ViT-7, T2T-ViT-10, T2T-ViT-12 (take Performer in T2T module),
 
-Download the [T2T-ViT-7](https://drive.google.com/file/d/1r2Qs6MVo3fkPWwQ0hZfK4nfl6HErgdjJ/view?usp=sharing), [T2T-ViT-10](https://drive.google.com/file/d/11v9UdXx_jw7E-lIO26MI9c29ANC2GUgw/view?usp=sharing) or [T2T-ViT-12](https://drive.google.com/file/d/1RnPvXX6HFdQ3O6B6WM1t8_SDDVBIeV6c/view?usp=sharing), then test it by running:
+Download the [T2T-ViT-7](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/71.7_T2T_ViT_7.pth.tar), [T2T-ViT-10](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/75.2_T2T_ViT_10.pth.tar) or [T2T-ViT-12](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/76.5_T2T_ViT_12.pth.tar), then test it by running:
 
 ```
 CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_7 -b 100 --eval_checkpoint path/to/checkpoint
@@ -142,7 +142,11 @@ CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --mod
 ```
 
 
-Train the T2T-ViT-14 and T2T-ViT_t-14:
+Train the T2T-ViT-14 and T2T-ViT_t-14 (run on 4 or 8 GPUs):
+
+```
+CUDA_VISIBLE_DEVICES=0,1,2,3 ./distributed_train.sh 4 path/to/data --model T2t_vit_14 -b 128 --lr 1e-3 --weight-decay .05 --amp --img-size 224
+```
 
 ```
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_14 -b 64 --lr 5e-4 --weight-decay .05 --amp --img-size 224
