@@ -24,7 +24,25 @@ from collections import OrderedDict
 _logger = logging.getLogger(__name__)
 
 
-def load_state_dict(checkpoint_path, use_ema=False, num_classes=1000):
+def resize_pos_embed(posemb, posemb_new): # example: 224:(14x14+1)-> 384: (24x24+1)
+    # Rescale the grid of position embeddings when loading from state_dict. Adapted from
+    # https://github.com/google-research/vision_transformer/blob/00883dd691c63a6830751563748663526e811cee/vit_jax/checkpoint.py#L224
+    ntok_new = posemb_new.shape[1]
+    if True:
+        posemb_tok, posemb_grid = posemb[:, :1], posemb[0, 1:]  # posemb_tok is for cls token, posemb_grid for the following tokens
+        ntok_new -= 1
+    else:
+        posemb_tok, posemb_grid = posemb[:, :0], posemb[0]
+    gs_old = int(math.sqrt(len(posemb_grid)))     # 14
+    gs_new = int(math.sqrt(ntok_new))             # 24
+    _logger.info('Position embedding grid-size from %s to %s', gs_old, gs_new)
+    posemb_grid = posemb_grid.reshape(1, gs_old, gs_old, -1).permute(0, 3, 1, 2)  # [1, 196, dim]->[1, 14, 14, dim]->[1, dim, 14, 14]
+    posemb_grid = F.interpolate(posemb_grid, size=(gs_new, gs_new), mode='bicubic') # [1, dim, 14, 14] -> [1, dim, 24, 24]
+    posemb_grid = posemb_grid.permute(0, 2, 3, 1).reshape(1, gs_new * gs_new, -1)   # [1, dim, 24, 24] -> [1, 24*24, dim]
+    posemb = torch.cat([posemb_tok, posemb_grid], dim=1)   # [1, 24*24+1, dim]
+    return posemb
+
+def load_state_dict(checkpoint_path, model, use_ema=False, num_classes=1000, del_posemb=False):
     if checkpoint_path and os.path.isfile(checkpoint_path):
         checkpoint = torch.load(checkpoint_path, map_location='cpu')
         state_dict_key = 'state_dict'
@@ -46,10 +64,19 @@ def load_state_dict(checkpoint_path, use_ema=False, num_classes=1000):
             del state_dict['head' + '.weight']
             del state_dict['head' + '.bias']
 
+        if del_posemb==True:
+            del state_dict['pos_embed']
+
+        old_posemb = state_dict['pos_embed']
+        if model.pos_embed.shape != old_posemb.shape:  # need resize the position embedding by interpolate
+            new_posemb = resize_pos_embed(old_posemb, model.pos_embed)
+            state_dict['pos_embed'] = new_posemb
+
         return state_dict
     else:
         _logger.error("No checkpoint found at '{}'".format(checkpoint_path))
         raise FileNotFoundError()
+
 
 
 def load_for_transfer_learning(model, checkpoint_path, use_ema=False, strict=True, num_classes=1000):
