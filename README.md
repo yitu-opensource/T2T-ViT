@@ -89,7 +89,7 @@ from utils import load_for_transfer_learning
 model = T2t_vit_14()
 
 # load the preatrained weights
-load_for_transfer_learning(model, /path/to/pretrained/weights, use_ema=True, strict=False, num_classes=1000)  # change num_classes based on dataset
+load_for_transfer_learning(model, /path/to/pretrained/weights, use_ema=True, strict=False, num_classes=1000)  # change num_classes based on dataset, can work for different image size as we interpolate the position embeding for different image size.
 ```
 
 
