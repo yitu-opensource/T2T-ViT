@@ -74,9 +74,9 @@ The 'T2T-ViT-24, Token Labeling' means we train T2T-ViT-24 with [Token Labeling]
 The three lite variants of T2T-ViT (Comparing with MobileNets):
 | Model    | T2T Transformer | Top1 Acc | #params | MACs |  Download|
 | :---     |   :---:         |  :---:   |  :---:  | :---: |  :---:   | 
-| T2T-ViT-7   |  Performer  |   71.7   |  4.3M   | 1.2G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/71.7_T2T_ViT_7.pth.tar)| 
-| T2T-ViT-10   |  Performer  |   75.2   |  5.9M   | 1.8G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/75.2_T2T_ViT_10.pth.tar)| 
-| T2T-ViT-12   |  Performer  |   76.5   |  6.9M   | 2.2G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/76.5_T2T_ViT_12.pth.tar)  |
+| T2T-ViT-7   |  Performer  |   71.7   |  4.3M   | 1.1G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/71.7_T2T_ViT_7.pth.tar)| 
+| T2T-ViT-10   |  Performer  |   75.2   |  5.9M   | 1.5G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/75.2_T2T_ViT_10.pth.tar)| 
+| T2T-ViT-12   |  Performer  |   76.5   |  6.9M   | 1.9G  | [here](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/76.5_T2T_ViT_12.pth.tar)  |
 
 
 ### Usage
