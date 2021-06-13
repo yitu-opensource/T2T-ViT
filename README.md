@@ -86,7 +86,7 @@ from models.t2t_vit import *
 from utils import load_for_transfer_learning 
 
 # create model
-model = T2t_vit_14()
+model = t2t_vit_14()
 
 # load the pretrained weights
 load_for_transfer_learning(model, /path/to/pretrained/weights, use_ema=True, strict=False, num_classes=1000)  # change num_classes based on dataset, can work for different image size as we interpolate the position embeding for different image size.
@@ -100,7 +100,7 @@ Test the T2T-ViT-14 (take Performer in T2T module),
 Download the [T2T-ViT-14](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/81.5_T2T_ViT_14.pth.tar), then test it by running:
 
 ```
-CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_14 -b 100 --eval_checkpoint path/to/checkpoint
+CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model t2t_vit_14 -b 100 --eval_checkpoint path/to/checkpoint
 ```
 The results look like:
 
