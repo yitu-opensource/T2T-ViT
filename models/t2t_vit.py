@@ -173,7 +173,7 @@ class T2T_ViT(nn.Module):
         return x
 
 @register_model
-def T2t_vit_7(pretrained=False, **kwargs): # adopt performer for tokens to token
+def t2t_vit_7(pretrained=False, **kwargs): # adopt performer for tokens to token
     if pretrained:
         kwargs.setdefault('qk_scale', 256 ** -0.5)
     model = T2T_ViT(tokens_type='performer', embed_dim=256, depth=7, num_heads=4, mlp_ratio=2., **kwargs)
@@ -184,7 +184,7 @@ def T2t_vit_7(pretrained=False, **kwargs): # adopt performer for tokens to token
     return model
 
 @register_model
-def T2t_vit_10(pretrained=False, **kwargs): # adopt performer for tokens to token
+def t2t_vit_10(pretrained=False, **kwargs): # adopt performer for tokens to token
     if pretrained:
         kwargs.setdefault('qk_scale', 256 ** -0.5)
     model = T2T_ViT(tokens_type='performer', embed_dim=256, depth=10, num_heads=4, mlp_ratio=2., **kwargs)
@@ -195,7 +195,7 @@ def T2t_vit_10(pretrained=False, **kwargs): # adopt performer for tokens to toke
     return model
 
 @register_model
-def T2t_vit_12(pretrained=False, **kwargs): # adopt performer for tokens to token
+def t2t_vit_12(pretrained=False, **kwargs): # adopt performer for tokens to token
     if pretrained:
         kwargs.setdefault('qk_scale', 256 ** -0.5)
     model = T2T_ViT(tokens_type='performer', embed_dim=256, depth=12, num_heads=4, mlp_ratio=2., **kwargs)
@@ -207,7 +207,7 @@ def T2t_vit_12(pretrained=False, **kwargs): # adopt performer for tokens to toke
 
 
 @register_model
-def T2t_vit_14(pretrained=False, **kwargs):  # adopt performer for tokens to token
+def t2t_vit_14(pretrained=False, **kwargs):  # adopt performer for tokens to token
     if pretrained:
         kwargs.setdefault('qk_scale', 384 ** -0.5)
     model = T2T_ViT(tokens_type='performer', embed_dim=384, depth=14, num_heads=6, mlp_ratio=3., **kwargs)
@@ -218,7 +218,7 @@ def T2t_vit_14(pretrained=False, **kwargs):  # adopt performer for tokens to tok
     return model
 
 @register_model
-def T2t_vit_19(pretrained=False, **kwargs): # adopt performer for tokens to token
+def t2t_vit_19(pretrained=False, **kwargs): # adopt performer for tokens to token
     if pretrained:
         kwargs.setdefault('qk_scale', 448 ** -0.5)
     model = T2T_ViT(tokens_type='performer', embed_dim=448, depth=19, num_heads=7, mlp_ratio=3., **kwargs)
@@ -229,7 +229,7 @@ def T2t_vit_19(pretrained=False, **kwargs): # adopt performer for tokens to toke
     return model
 
 @register_model
-def T2t_vit_24(pretrained=False, **kwargs): # adopt performer for tokens to token
+def t2t_vit_24(pretrained=False, **kwargs): # adopt performer for tokens to token
     if pretrained:
         kwargs.setdefault('qk_scale', 512 ** -0.5)
     model = T2T_ViT(tokens_type='performer', embed_dim=512, depth=24, num_heads=8, mlp_ratio=3., **kwargs)
@@ -240,7 +240,7 @@ def T2t_vit_24(pretrained=False, **kwargs): # adopt performer for tokens to toke
     return model
 
 @register_model
-def T2t_vit_t_14(pretrained=False, **kwargs):  # adopt transformers for tokens to token
+def t2t_vit_t_14(pretrained=False, **kwargs):  # adopt transformers for tokens to token
     if pretrained:
         kwargs.setdefault('qk_scale', 384 ** -0.5)
     model = T2T_ViT(tokens_type='transformer', embed_dim=384, depth=14, num_heads=6, mlp_ratio=3., **kwargs)
@@ -251,7 +251,7 @@ def T2t_vit_t_14(pretrained=False, **kwargs):  # adopt transformers for tokens t
     return model
 
 @register_model
-def T2t_vit_t_19(pretrained=False, **kwargs):  # adopt transformers for tokens to token
+def t2t_vit_t_19(pretrained=False, **kwargs):  # adopt transformers for tokens to token
     if pretrained:
         kwargs.setdefault('qk_scale', 448 ** -0.5)
     model = T2T_ViT(tokens_type='transformer', embed_dim=448, depth=19, num_heads=7, mlp_ratio=3., **kwargs)
@@ -262,7 +262,7 @@ def T2t_vit_t_19(pretrained=False, **kwargs):  # adopt transformers for tokens t
     return model
 
 @register_model
-def T2t_vit_t_24(pretrained=False, **kwargs):  # adopt transformers for tokens to token
+def t2t_vit_t_24(pretrained=False, **kwargs):  # adopt transformers for tokens to token
     if pretrained:
         kwargs.setdefault('qk_scale', 512 ** -0.5)
     model = T2T_ViT(tokens_type='transformer', embed_dim=512, depth=24, num_heads=8, mlp_ratio=3., **kwargs)
@@ -274,7 +274,7 @@ def T2t_vit_t_24(pretrained=False, **kwargs):  # adopt transformers for tokens t
 
 # rexnext and wide structure
 @register_model
-def T2t_vit_14_resnext(pretrained=False, **kwargs):
+def t2t_vit_14_resnext(pretrained=False, **kwargs):
     if pretrained:
         kwargs.setdefault('qk_scale', 384 ** -0.5)
     model = T2T_ViT(tokens_type='performer', embed_dim=384, depth=14, num_heads=32, mlp_ratio=3., **kwargs)
@@ -285,7 +285,7 @@ def T2t_vit_14_resnext(pretrained=False, **kwargs):
     return model
 
 @register_model
-def T2t_vit_14_wide(pretrained=False, **kwargs):
+def t2t_vit_14_wide(pretrained=False, **kwargs):
     if pretrained:
         kwargs.setdefault('qk_scale', 512 ** -0.5)
     model = T2T_ViT(tokens_type='performer', embed_dim=768, depth=4, num_heads=12, mlp_ratio=3., **kwargs)
