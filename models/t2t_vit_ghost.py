@@ -185,7 +185,7 @@ class T2T_ViT_Ghost(nn.Module):
 
 
 @register_model
-def T2t_vit_16_ghost(pretrained=False, **kwargs):
+def t2t_vit_16_ghost(pretrained=False, **kwargs):
     if pretrained:
         kwargs.setdefault('qk_scale', 384 ** -0.5)
     model = T2T_ViT_Ghost(tokens_type='performer', embed_dim=384, depth=16, num_heads=6, mlp_ratio=3., **kwargs)
