@@ -157,7 +157,7 @@ class T2T_ViT_SE(nn.Module):
         return x
 
 @register_model
-def T2t_vit_14_se(pretrained=False, **kwargs):
+def t2t_vit_14_se(pretrained=False, **kwargs):
     if pretrained:
         kwargs.setdefault('qk_scale', 384 ** -0.5)
     model = T2T_ViT_SE(tokens_type='performer', embed_dim=384, depth=14, num_heads=6, mlp_ratio=3., **kwargs)
