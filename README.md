@@ -118,12 +118,12 @@ Test the three lite variants: T2T-ViT-7, T2T-ViT-10, T2T-ViT-12 (take Performer 
 Download the [T2T-ViT-7](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/71.7_T2T_ViT_7.pth.tar), [T2T-ViT-10](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/75.2_T2T_ViT_10.pth.tar) or [T2T-ViT-12](https://github.com/yitu-opensource/T2T-ViT/releases/download/main/76.5_T2T_ViT_12.pth.tar), then test it by running:
 
 ```
-CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_7 -b 100 --eval_checkpoint path/to/checkpoint
+CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model t2t_vit_7 -b 100 --eval_checkpoint path/to/checkpoint
 ```
 
 Test the model T2T-ViT-14, 384 with 83.3\% top-1 accuracy: 
 ```
-CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model T2t_vit_14 --img-size 384 -b 100 --eval_checkpoint path/to/T2T-ViT-14-384 
+CUDA_VISIBLE_DEVICES=0 python main.py path/to/data --model t2t_vit_14 --img-size 384 -b 100 --eval_checkpoint path/to/T2T-ViT-14-384 
 ```
 
 
@@ -134,25 +134,25 @@ Train the three lite variants: T2T-ViT-7, T2T-ViT-10 and T2T-ViT-12 (take Perfor
 If only 4 GPUs are available,
 
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3 ./distributed_train.sh 4 path/to/data --model T2t_vit_7 -b 128 --lr 1e-3 --weight-decay .03 --amp --img-size 224
+CUDA_VISIBLE_DEVICES=0,1,2,3 ./distributed_train.sh 4 path/to/data --model t2t_vit_7 -b 128 --lr 1e-3 --weight-decay .03 --amp --img-size 224
 ```
 
 The top1-acc in 4 GPUs would be slightly lower than 8 GPUs (around 0.1%-0.3% lower).
 
 If 8 GPUs are available: 
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_7 -b 64 --lr 1e-3 --weight-decay .03 --amp --img-size 224
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model t2t_vit_7 -b 64 --lr 1e-3 --weight-decay .03 --amp --img-size 224
 ```
 
 
 Train the T2T-ViT-14 and T2T-ViT_t-14 (run on 4 or 8 GPUs):
 
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3 ./distributed_train.sh 4 path/to/data --model T2t_vit_14 -b 128 --lr 1e-3 --weight-decay .05 --amp --img-size 224
+CUDA_VISIBLE_DEVICES=0,1,2,3 ./distributed_train.sh 4 path/to/data --model t2t_vit_14 -b 128 --lr 1e-3 --weight-decay .05 --amp --img-size 224
 ```
 
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_14 -b 64 --lr 5e-4 --weight-decay .05 --amp --img-size 224
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model t2t_vit_14 -b 64 --lr 5e-4 --weight-decay .05 --amp --img-size 224
 ```
 If you want to train our T2T-ViT on images with 384x384 resolution, please use '--img-size 384'.
 
@@ -160,7 +160,7 @@ If you want to train our T2T-ViT on images with 384x384 resolution, please use '
 Train the T2T-ViT-19, T2T-ViT-24 or T2T-ViT_t-19, T2T-ViT_t-24:
 
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model T2t_vit_19 -b 64 --lr 5e-4 --weight-decay .065 --amp --img-size 224
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 ./distributed_train.sh 8 path/to/data --model t2t_vit_19 -b 64 --lr 5e-4 --weight-decay .065 --amp --img-size 224
 ```
 
 ## 5. Transfer T2T-ViT to CIFAR10/CIFAR100
