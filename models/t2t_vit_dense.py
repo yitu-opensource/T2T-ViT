@@ -160,7 +160,7 @@ class T2T_ViT_Dense(nn.Module):
         return x
 
 @register_model
-def T2t_vit_dense(pretrained=False, **kwargs):
+def t2t_vit_dense(pretrained=False, **kwargs):
     model = T2T_ViT_Dense(growth_rate=64, block_config=(3, 6, 6, 4), embed_dim=128, num_heads=8, mlp_ratio=2., **kwargs)
     model.default_cfg = default_cfgs['t2t_vit_dense']
     if pretrained:
