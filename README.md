@@ -1,4 +1,4 @@
-# Tokens-to-Token ViT: Training Vision Transformers from Scratch on ImageNet, [arxiv](https://arxiv.org/abs/2101.11986)
+# Tokens-to-Token ViT: Training Vision Transformers from Scratch on ImageNet, [ICCV 2021](https://openaccess.thecvf.com/content/ICCV2021/papers/Yuan_Tokens-to-Token_ViT_Training_Vision_Transformers_From_Scratch_on_ImageNet_ICCV_2021_paper.pdf)
 
 ### Update:
 2021/03/11: update our new results. Now our T2T-ViT-14 with 21.5M parameters can reach 81.5% top1-acc with 224x224 image resolution, and 83.3\% top1-acc with 384x384 resolution. 
