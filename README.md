@@ -1,4 +1,4 @@
-# Tokens-to-Token ViT: Training Vision Transformers from Scratch on ImageNet, [ICCV 2021](https://openaccess.thecvf.com/content/ICCV2021/papers/Yuan_Tokens-to-Token_ViT_Training_Vision_Transformers_From_Scratch_on_ImageNet_ICCV_2021_paper.pdf)
+# Tokens-to-Token ViT: Training Vision Transformers from Scratch on ImageNet, [ICCV 2021](https://openaccess.thecvf.com/content/ICCV2021/html/Yuan_Tokens-to-Token_ViT_Training_Vision_Transformers_From_Scratch_on_ImageNet_ICCV_2021_paper.html)
 
 ### Update:
 2021/03/11: update our new results. Now our T2T-ViT-14 with 21.5M parameters can reach 81.5% top1-acc with 224x224 image resolution, and 83.3\% top1-acc with 384x384 resolution. 
@@ -14,11 +14,13 @@
 ## Reference
 If you find this repo useful, please consider citing:
 ```
-@article{yuan2021tokens,
-  title={Tokens-to-token vit: Training vision transformers from scratch on imagenet},
-  author={Yuan, Li and Chen, Yunpeng and Wang, Tao and Yu, Weihao and Shi, Yujun and Tay, Francis EH and Feng, Jiashi and Yan, Shuicheng},
-  journal={arXiv preprint arXiv:2101.11986},
-  year={2021}
+@InProceedings{Yuan_2021_ICCV,
+    author    = {Yuan, Li and Chen, Yunpeng and Wang, Tao and Yu, Weihao and Shi, Yujun and Jiang, Zi-Hang and Tay, Francis E.H. and Feng, Jiashi and Yan, Shuicheng},
+    title     = {Tokens-to-Token ViT: Training Vision Transformers From Scratch on ImageNet},
+    booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+    month     = {October},
+    year      = {2021},
+    pages     = {558-567}
 }
 ```
 
