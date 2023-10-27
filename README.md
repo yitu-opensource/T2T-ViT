@@ -3,7 +3,7 @@
 ### Update:
 2021/03/11: update our new results. Now our T2T-ViT-14 with 21.5M parameters can reach 81.5% top1-acc with 224x224 image resolution, and 83.3\% top1-acc with 384x384 resolution. 
 
-2021/02/21: T2T-ViT can be trained on most of common GPUs: 1080Ti, 2080Ti, TiTAN V, V100 stably with '--amp' (Automatic Mixed Precision). In some specifical GPU like Tesla T4, 'amp' would cause NAN loss when training T2T-ViT. If you get NAN loss in training, you can disable amp by removing '--amp' in the [training scripts](https://github.com/yitu-opensource/T2T-ViT#train).
+2021/02/21: T2T-ViT can be trained on most of common GPUs: 1080Ti, 2080Ti, TiTAN V, V100 stably with '--amp' (Automatic Mixed Precision). In some specific GPU like Tesla T4, 'amp' would cause NAN loss when training T2T-ViT. If you get NAN loss in training, you can disable amp by removing '--amp' in the [training scripts](https://github.com/yitu-opensource/T2T-ViT#train).
 
 2021/01/28: release codes and upload most of the pretrained models of T2T-ViT.
 
@@ -35,7 +35,7 @@ torch>=1.4.0
 
 torchvision>=0.5.0
 
-pyyaml
+pyyml
 
 data prepare: ImageNet with the following folder structure, you can extract imagenet by this [script](https://gist.github.com/BIGBALLON/8a71d225eff18d88e469e6ea9b39cef4).
 
@@ -91,7 +91,7 @@ from utils import load_for_transfer_learning
 model = t2t_vit_14()
 
 # load the pretrained weights
-load_for_transfer_learning(model, /path/to/pretrained/weights, use_ema=True, strict=False, num_classes=1000)  # change num_classes based on dataset, can work for different image size as we interpolate the position embeding for different image size.
+load_for_transfer_learning(model, /path/to/pretrained/weights, use_ema=True, strict=False, num_classes=1000)  # change num_classes based on dataset, can work for different image size as we interpolate the position embedding for different image size.
 ```
 
 
